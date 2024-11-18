@@ -1,3 +1,5 @@
+import React from 'react';
+import Head from 'next/head';
 import { CartProvider } from 'components/cart/cart-context';
 import { Navbar } from 'components/layout/navbar';
 import { WelcomeToast } from 'components/welcome-toast';
@@ -7,6 +9,7 @@ import { ensureStartsWith } from 'lib/utils';
 import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
+import Script from 'next/script';
 
 import './globals.css';
 
@@ -38,13 +41,26 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
+
   const cartId = (await cookies()).get('cartId')?.value;
   // Don't await the fetch, pass the Promise to the context provider
   const cart = getCart(cartId);
 
   return (
+    
     <html lang="en" className={GeistSans.variable}>
+     
+     <Script
+  strategy="afterInteractive"
+  src="https://embed.tawk.to/673b9a344304e3196ae49f6f/1id0d4nr1"
+  type="text/javascript"
+  async
+  crossOrigin="anonymous"
+/>
+
+
       <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+
         <CartProvider cartPromise={cart}>
           <Navbar />
           <main>
@@ -53,7 +69,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <WelcomeToast />
           </main>
         </CartProvider>
-        <script src="/js/preline.js"></script>
+
       </body>
     </html>
   );
