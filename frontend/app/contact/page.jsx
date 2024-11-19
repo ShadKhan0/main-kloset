@@ -1,7 +1,9 @@
 import React from 'react';
 import Footer from '../../components/layout/footer';
 const Page = () => {
+  
   return (
+
     <>
       <>
         {/* Contact Us */}
@@ -18,7 +20,7 @@ const Page = () => {
           </div>
           <>
             {/* Contact */}
-            <div className="mx-auto max-w-7xl px-4 lg:px-6 lg:px-8 lg:py-14">
+            <div className="mx-auto max-w-7xl px-4  lg:px-8 lg:py-14">
               <div className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
                 <div className="aspect-w-16 aspect-h-6 lg:aspect-h-14 overflow-hidden rounded-2xl bg-gray-100 dark:bg-neutral-800">
                   <img

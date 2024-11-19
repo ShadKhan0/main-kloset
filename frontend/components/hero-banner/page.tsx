@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import Link from 'next/link';
 const Page = () => {
@@ -13,20 +14,20 @@ const Page = () => {
             className="relative"
           >
             <div className="hs-carousel relative h-[30rem] w-full overflow-hidden rounded-2xl bg-gray-100 md:h-[calc(100vh-106px)] dark:bg-neutral-800">
-                        <div className="hs-carousel-body absolute bottom-0 start-0 top-0 flex flex-nowrap opacity-0 transition-transform duration-700">
+              <div className="hs-carousel-body absolute bottom-0 start-0 top-0 flex flex-nowrap opacity-0 transition-transform duration-700">
                 <div className="hs-carousel-slide">
                   <div className="flex h-[30rem] flex-col bg-[url('/banner-2.svg')] bg-cover bg-right bg-no-repeat md:h-[calc(100vh-106px)]">
                     <div className="mt-auto w-2/3 pb-5 ps-5 md:max-w-lg md:pb-10 md:ps-10">
                       <span className="block text-white">Oversized-Tees</span>
                       <span className="block text-xl text-white md:text-3xl">
-                       Get 50% off on Your Favourite Brands.
+                        Get 50% off on Your Favourite Brands.
                       </span>
                       <div className="mt-5">
                         <Link
                           className="inline-flex items-center gap-x-2 rounded-xl border border-transparent bg-white px-3 py-2 text-sm font-medium text-black hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                           href="http://localhost:3000/search"
                         >
-                        Shop Now!
+                          Shop Now!
                         </Link>
                       </div>
                     </div>
@@ -39,14 +40,14 @@ const Page = () => {
                     <div className="mt-auto w-2/3 pb-5 ps-5 md:max-w-lg md:pb-10 md:ps-10">
                       <span className="block text-white">Foot Essentials</span>
                       <span className="block text-xl text-white md:text-3xl">
-                       Flash Sale- Get 30% off on All Nike Shoes.
+                        Flash Sale- Get 30% off on All Nike Shoes.
                       </span>
                       <div className="mt-5">
                         <Link
                           className="inline-flex items-center gap-x-2 rounded-xl border border-transparent bg-white px-3 py-2 text-sm font-medium text-black hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                           href="http://localhost:3000/search"
                         >
-                         Buy Now!
+                          Buy Now!
                         </Link>
                       </div>
                     </div>
@@ -59,14 +60,14 @@ const Page = () => {
                     <div className="mt-auto w-2/3 pb-5 ps-5 md:max-w-lg md:pb-10 md:ps-10">
                       <span className="block text-white">Winter Collection</span>
                       <span className="block text-xl text-white md:text-3xl">
-                       600gsm Hoodies with Custom Print.
+                        600gsm Hoodies with Custom Print.
                       </span>
                       <div className="mt-5">
                         <Link
                           className="inline-flex items-center gap-x-2 rounded-xl border border-transparent bg-white px-3 py-2 text-sm font-medium text-black hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                           href="http://localhost:3000/search"
                         >
-                           Shop Collection!
+                          Shop Collection!
                         </Link>
                       </div>
                     </div>
