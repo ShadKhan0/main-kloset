@@ -1,7 +1,7 @@
-"use client"
+
 import React from 'react';
 import Link from 'next/link';
-const Page = () => {
+export default function Page() {
   return (
     <>
       <>
@@ -131,4 +131,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+

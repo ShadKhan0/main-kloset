@@ -6,7 +6,7 @@ const Page = () => {
       <div className="flex min-h-screen flex-col items-center justify-center">
         <div className="m-4 grid w-full max-w-6xl items-center gap-4 rounded-md p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] max-md:max-w-lg max-md:gap-8 md:grid-cols-2">
           <div className="w-full px-4 py-4 md:max-w-md">
-            <form>
+            <form action="/login" method="post">
               <div className="mb-12">
                 <h3 className="text-3xl font-extrabold text-gray-800">Sign in</h3>
                 <p className="mt-4 text-sm text-gray-800">
@@ -24,6 +24,7 @@ const Page = () => {
                 <div className="relative flex items-center">
                   <input
                     name="email"
+                    id='email'
                     type="text"
                     required=""
                     className="w-full border-b border-gray-300 px-2 py-3 text-sm text-gray-800 outline-none focus:border-blue-600"
@@ -62,6 +63,7 @@ const Page = () => {
                 <div className="relative flex items-center">
                   <input
                     name="password"
+                    id='password'
                     type="password"
                     required=""
                     className="w-full border-b border-gray-300 px-2 py-3 text-sm text-gray-800 outline-none focus:border-blue-600"
@@ -150,7 +152,7 @@ const Page = () => {
                     />
                   </svg>
                 </button>
-                <button type="button" className="border-none outline-none">
+                <button type="submit" className="border-none outline-none">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32px"

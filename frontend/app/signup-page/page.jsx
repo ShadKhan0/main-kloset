@@ -24,7 +24,7 @@ const Page = () => {
           </p>
         </div>
       </div>
-      <form className="md:col-span-2 w-full py-6 px-6 sm:px-16">
+      <form action="/signup" method="post" className="md:col-span-2 w-full py-6 px-6 sm:px-16">
         <div className="mb-6">
           <h3 className="text-gray-800 text-2xl font-bold">Create an account</h3>
         </div>
@@ -35,6 +35,7 @@ const Page = () => {
               <input
                 name="name"
                 type="text"
+                id='name'
                 required=""
                 className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                 placeholder="Enter name"
@@ -60,6 +61,7 @@ const Page = () => {
               <input
                 name="email"
                 type="email"
+                id='email'
                 required=""
                 className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                 placeholder="Enter email"
@@ -101,6 +103,7 @@ const Page = () => {
               <input
                 name="password"
                 type="password"
+                id='passsword'
                 required=""
                 className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                 placeholder="Enter password"
@@ -142,7 +145,7 @@ const Page = () => {
         </div>
         <div className="!mt-12">
           <button
-            type="button"
+            type="submit"
             className="w-full py-3 px-4 tracking-wider text-sm rounded-md text-white bg-gray-700 hover:bg-gray-800 focus:outline-none"
           >
             Create an account

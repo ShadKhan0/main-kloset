@@ -5,6 +5,7 @@ import HeroSection  from 'components/hero-banner/page';
 import Countdown from 'components/countdown';
 import CategorySection from 'components/category-section/page';
 import Features from 'components/features/page';
+
 export const metadata = {
   description: 'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
   openGraph: {
