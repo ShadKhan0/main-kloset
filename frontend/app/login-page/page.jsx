@@ -1,6 +1,41 @@
+"use client"
 import React from 'react';
 import Link from 'next/link';
+import axios from 'axios';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+const loginSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Please enter email"),
+
+});
+
+const initialValues = {
+  
+  email: "",
+ 
+ 
+};
 const Page = () => {
+  const formik = useFormik({
+    initialValues:initialValues,
+    validationSchema:loginSchema,
+    onSubmit:(values, {resetForm, setSubmitting}) => {
+        console.log(values);
+        axios.post("http://localhost:5000/user/add", values).then((response) => {
+            console.log(response.status);
+            resetForm();
+           setTimeout(() => {
+            router.push("/");
+          }, 2000);
+        }).catch((err) => {
+            console.log(err);
+           
+            setSubmitting(false);
+            
+        });
+        
+    }
+})
   return (
     <div className="font-[sans-serif]">
       <div className="flex min-h-screen flex-col items-center justify-center">
@@ -26,7 +61,9 @@ const Page = () => {
                     name="email"
                     id='email'
                     type="text"
-                    required=""
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
                     className="w-full border-b border-gray-300 px-2 py-3 text-sm text-gray-800 outline-none focus:border-blue-600"
                     placeholder="Enter email"
                   />
@@ -57,6 +94,11 @@ const Page = () => {
                     </g>
                   </svg>
                 </div>
+                {formik.errors.email && formik.touched.email ? (
+                      <p className="text-xs text-red-600 mt-2">
+                        {formik.errors.email}
+                      </p>
+                    ) : null}
               </div>
               <div className="mt-8">
                 <label className="mb-2 block text-xs text-gray-800">Password</label>
@@ -66,6 +108,9 @@ const Page = () => {
                     id='password'
                     type="password"
                     required=""
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.password}
                     className="w-full border-b border-gray-300 px-2 py-3 text-sm text-gray-800 outline-none focus:border-blue-600"
                     placeholder="Enter password"
                   />
@@ -165,7 +210,7 @@ const Page = () => {
                     />
                   </svg>
                 </button>
-                <button type="button" className="border-none outline-none">
+                <button disabled={formik.isSubmitting} type="submit" className="border-none outline-none">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32px"

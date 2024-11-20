@@ -1,7 +1,9 @@
+"use client"
 import React from 'react'
 import Link from 'next/link'
 import * as Yup from "yup";
 import { useFormik } from 'formik';
+import axios from 'axios';
 const signupSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, "Too short")
@@ -72,7 +74,7 @@ const Page = () => {
           </p>
         </div>
       </div>
-      <form action="/signup" method="post" className="md:col-span-2 w-full py-6 px-6 sm:px-16">
+      <form onSubmit={formik.handleSubmit} className="md:col-span-2 w-full py-6 px-6 sm:px-16">
         <div className="mb-6">
           <h3 className="text-gray-800 text-2xl font-bold">Create an account</h3>
         </div>
@@ -84,10 +86,13 @@ const Page = () => {
                 name="name"
                 type="text"
                 id='name'
-                required=""
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.name}
                 className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                 placeholder="Enter name"
               />
+              
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#bbb"
@@ -101,7 +106,13 @@ const Page = () => {
                   data-original="#000000"
                 />
               </svg>
+              
             </div>
+            {formik.errors.name && formik.touched.name ? (
+                      <p className="text-xs text-red-600 mt-2">
+                        {formik.errors.name}
+                      </p>
+                    ) : null}
           </div>
           <div>
             <label className="text-gray-800 text-sm mb-2 block">Email Id</label>
@@ -110,10 +121,13 @@ const Page = () => {
                 name="email"
                 type="email"
                 id='email'
-                required=""
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
                 className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                 placeholder="Enter email"
               />
+               
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#bbb"
@@ -144,6 +158,11 @@ const Page = () => {
                 </g>
               </svg>
             </div>
+            {formik.errors.email && formik.touched.email ? (
+                      <p className="text-xs text-red-600 mt-2">
+                        {formik.errors.email}
+                      </p>
+                    ) : null}
           </div>
           <div>
             <label className="text-gray-800 text-sm mb-2 block">Password</label>
@@ -152,10 +171,13 @@ const Page = () => {
                 name="password"
                 type="password"
                 id='passsword'
-                required=""
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
                 className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                 placeholder="Enter password"
               />
+                
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#bbb"
@@ -169,6 +191,11 @@ const Page = () => {
                 />
               </svg>
             </div>
+            {formik.errors.password && formik.touched.password ? (
+                      <p className="text-xs text-red-600 mt-2">
+                        {formik.errors.password}
+                      </p>
+                    ) : null}
           </div>
           <div className="flex items-center">
             <input
@@ -193,6 +220,8 @@ const Page = () => {
         </div>
         <div className="!mt-12">
           <button
+         disabled={formik.isSubmitting}
+
             type="submit"
             className="w-full py-3 px-4 tracking-wider text-sm rounded-md text-white bg-gray-700 hover:bg-gray-800 focus:outline-none"
           >
