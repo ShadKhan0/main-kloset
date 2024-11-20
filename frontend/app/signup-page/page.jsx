@@ -1,9 +1,12 @@
 "use client"
 import React from 'react'
+import { useRouter } from 'next/navigation';
 import Link from 'next/link'
 import * as Yup from "yup";
 import { useFormik } from 'formik';
 import axios from 'axios';
+import { toast } from 'sonner';
+
 const signupSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, "Too short")
@@ -28,21 +31,33 @@ const initialValues = {
 };
 
 const Page = () => {
+  const router = useRouter();
   const formik = useFormik({
     initialValues:initialValues,
     validationSchema:signupSchema,
     onSubmit:(values, {resetForm, setSubmitting}) => {
         console.log(values);
-        axios.post("http://localhost:5000/user/add", values).then((response) => {
+        axios.post("http://localhost:5000/user/add", values).then((response, request) => {
             console.log(response.status);
             resetForm();
-           toast.success("Registered successfully");
+            if(response.status==200){
+           toast.success("Registered successfully🎉",{duration:2500}); }
+           
+          
+          
            setTimeout(() => {
-            router.push("/login");
+            router.push("/login-page");
           }, 2000);
         }).catch((err) => {
             console.log(err);
-            if (err.response.data.code === 11000) {
+            if(axios.isAxiosError(err)){
+              if(err.response?.status === 409){
+             
+                toast.error("User already exists!!",{duration:2500});
+              }
+            }
+           
+            else if (err.response.data.code === 11000) {
                 toast.error("Email exists");
               }
             setSubmitting(false);
