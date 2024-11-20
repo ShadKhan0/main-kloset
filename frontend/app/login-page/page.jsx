@@ -4,6 +4,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Please enter email"),
 
@@ -16,20 +17,36 @@ const initialValues = {
  
 };
 const Page = () => {
+  const router= useRouter();
   const formik = useFormik({
     initialValues:initialValues,
     validationSchema:loginSchema,
     onSubmit:(values, {resetForm, setSubmitting}) => {
         console.log(values);
-        axios.post("http://localhost:5000/user/add", values).then((response) => {
+        axios.post("http://localhost:5000/user/login", values).then((response) => {
             console.log(response.status);
+            if(response.status==200){
+              toast.success("Logged In successfully🎉",{duration:2500}); }
+              
             resetForm();
            setTimeout(() => {
             router.push("/");
           }, 2000);
         }).catch((err) => {
             console.log(err);
-           
+            if(axios.isAxiosError(err)){
+              if(err.response?.status === 404){
+             
+                toast.error("User not Found!!",{duration:2500});
+              }
+              else if(err.response?.status === 401){
+             
+                toast.error("Invalid Credentials!!",{duration:2500});
+              }
+            }
+           else{
+            toast.error("Something went wrong!!",{duration:2500});
+           }
             setSubmitting(false);
             
         });
@@ -41,7 +58,7 @@ const Page = () => {
       <div className="flex min-h-screen flex-col items-center justify-center">
         <div className="m-4 grid w-full max-w-6xl items-center gap-4 rounded-md p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] max-md:max-w-lg max-md:gap-8 md:grid-cols-2">
           <div className="w-full px-4 py-4 md:max-w-md">
-            <form action="/login" method="post">
+            <form onSubmit={formik.handleSubmit}>
               <div className="mb-12">
                 <h3 className="text-3xl font-extrabold text-gray-800">Sign in</h3>
                 <p className="mt-4 text-sm text-gray-800">
@@ -150,8 +167,8 @@ const Page = () => {
                 </div>
               </div>
               <div className="mt-12">
-                <button
-                  type="button"
+                <button disabled={formik.isSubmitting}
+                  type="submit"
                   className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm tracking-wide text-white shadow-xl hover:bg-blue-700 focus:outline-none"
                 >
                   Sign in
@@ -197,7 +214,7 @@ const Page = () => {
                     />
                   </svg>
                 </button>
-                <button type="submit" className="border-none outline-none">
+                <button type="button" className="border-none outline-none">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32px"
@@ -210,7 +227,7 @@ const Page = () => {
                     />
                   </svg>
                 </button>
-                <button disabled={formik.isSubmitting} type="submit" className="border-none outline-none">
+                <button  type="button" className="border-none outline-none">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32px"
