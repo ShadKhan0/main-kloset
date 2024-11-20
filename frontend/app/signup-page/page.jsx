@@ -1,6 +1,54 @@
 import React from 'react'
 import Link from 'next/link'
+import * as Yup from "yup";
+import { useFormik } from 'formik';
+const signupSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, "Too short")
+    .max(25, "Too Long")
+    .required("Please enter your name"),
+  email: Yup.string().email("Invalid email").required("Please enter email"),
+  password: Yup.string()
+    .min(6, "Too short")
+    .max(15, "Too Long")
+    .required("Please enter password")
+    .matches(/[a-z]/, "must include small letters")
+    .matches(/[A-Z]/, "must contain uppercase")
+    .matches(/[0-9]/, "must contain number")
+    .matches(/\W/, "must contain special char"),
+});
+
+const initialValues = {
+  name: "",
+  email: "",
+  password: "",
+ 
+};
+
 const Page = () => {
+  const formik = useFormik({
+    initialValues:initialValues,
+    validationSchema:signupSchema,
+    onSubmit:(values, {resetForm, setSubmitting}) => {
+        console.log(values);
+        axios.post("http://localhost:5000/user/add", values).then((response) => {
+            console.log(response.status);
+            resetForm();
+           toast.success("Registered successfully");
+           setTimeout(() => {
+            router.push("/login");
+          }, 2000);
+        }).catch((err) => {
+            console.log(err);
+            if (err.response.data.code === 11000) {
+                toast.error("Email exists");
+              }
+            setSubmitting(false);
+            
+        });
+        
+    }
+})
   return (
     <div className="font-[sans-serif] bg-white max-w-4xl flex items-center mx-auto md:h-screen p-4">
     <div className="grid md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden">

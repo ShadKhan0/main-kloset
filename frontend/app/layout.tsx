@@ -7,6 +7,7 @@ import { ensureStartsWith } from 'lib/utils';
 import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
+import PrelineScript from '../components/PrelineScript'
 import Script from 'next/script';
 
 import './globals.css';
@@ -57,18 +58,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <CartProvider cartPromise={cart}>
           <Navbar />
           <main>
-            {children}
+           <PrelineScript/> {children}
 
             <Toaster closeButton />
             <WelcomeToast />
           </main>
         </CartProvider>
-        <Script
-          strategy="afterInteractive"
-          src="/js/preline.js"
-          type="text/javascript"
-          async
-        ></Script>
+       
       </body>
     </html>
   );

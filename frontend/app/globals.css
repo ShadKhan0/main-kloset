@@ -61,3 +61,9 @@ body::before {
   background: rgba(255, 255, 255, 0.8); /* Adjust this for opacity */
   z-index: -1; /* Push overlay behind content */
 }
+.tawk-min-container button{
+  position: fixed !important;
+  bottom:40px;
+  right:40px;
+  z-index: -30;
+}
