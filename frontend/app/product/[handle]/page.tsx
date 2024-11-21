@@ -11,6 +11,7 @@ import { getProduct, getProductRecommendations } from 'lib/shopify';
 import { Image } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { Navbar } from 'components/layout/navbar';
 
 export async function generateMetadata(props: {
   params: Promise<{ handle: string }>;
@@ -74,6 +75,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
 
   return (
     <ProductProvider>
+      <Navbar/>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -116,6 +118,7 @@ async function RelatedProducts({ id }: { id: string }) {
   if (!relatedProducts.length) return null;
 
   return (
+   
     <div className="py-8">
       <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
       <ul className="flex w-full gap-4 overflow-x-auto pt-1">

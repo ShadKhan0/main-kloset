@@ -3,10 +3,12 @@ import Footer from 'components/layout/footer';
 import Collections from 'components/layout/search/collections';
 import FilterList from 'components/layout/search/filter';
 import { sorting } from 'lib/constants';
+import { Navbar } from 'components/layout/navbar';
 import ChildrenWrapper from './children-wrapper';
 export default function SearchLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+    <Navbar/>
 
       <div className="mx-auto flex max-w-screen-2xl flex-col gap-8 px-4 pb-4 text-black md:flex-row dark:text-white">
         <div className="order-first w-full flex-none md:max-w-[125px]">

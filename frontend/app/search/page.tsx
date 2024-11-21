@@ -2,7 +2,6 @@ import Grid from 'components/grid';
 import ProductGridItems from 'components/layout/product-grid-items';
 import { defaultSort, sorting } from 'lib/constants';
 import { getProducts } from 'lib/shopify';
-
 export const metadata = {
   title: 'Search',
   description: 'Search for products in the store.'
@@ -20,6 +19,7 @@ export default async function SearchPage(props: {
 
   return (
     <>
+  
     <div className='text-4xl text-center py-7'> <h1 className='text-4xl underline'>SHOP</h1> </div>
       {searchValue ? (
         <p className="mb-4">

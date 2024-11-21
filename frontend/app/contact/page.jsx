@@ -1,11 +1,13 @@
 import React from 'react';
 import Footer from '../../components/layout/footer';
+import { Navbar } from 'components/layout/navbar';
 const Page = () => {
   
   return (
 
     
       <>
+      <Navbar />
         {/* Contact Us */}
         <div className="lg:py-18 mx-auto max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-xl">
