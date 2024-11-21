@@ -4,6 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { jwtDecode } from 'jwt-decode';
 
+
 const Page = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,7 +50,14 @@ const Page = () => {
     <>
       {/* component */}
       {/* This is an example component */}
-      <div className='py-12 w-[80%] mx-auto mb-0'><Link  className='bg-black text-white rounded-md px-4 py-2' href="/">back to home</Link></div>
+      <div className='py-12 w-[12%] mx-auto mb-0 ml-[10%]'>
+  <Link className='flex items-center bg-black text-white rounded-md px-4 py-2' href="/">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="11"   height="20" id="arrow" className='mr-2 hover:-translate-x-1'>
+      <path fillRule="evenodd" d="M10.634.292a1.063 1.063 0 0 0-1.464 0L.607 8.556a1.95 1.95 0 0 0 0 2.827l8.625 8.325c.4.385 1.048.39 1.454.01a.975.975 0 0 0 .01-1.425l-7.893-7.617a.975.975 0 0 1 0-1.414l7.83-7.557a.974.974 0 0 0 0-1.413"></path>
+    </svg>
+    back to home
+  </Link>
+</div>
       <div>
         
         <h1 className="pb-12 text-center text-5xl">Your Profile</h1>
@@ -111,6 +119,7 @@ const Page = () => {
           </div>
         </div>
       </div>
+      
     </>
   );
 };

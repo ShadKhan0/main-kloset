@@ -15,7 +15,7 @@ export async function Navbar() {
     { title: 'Home', path: '/' },
     { title: 'Shop', path: '/search' },
     { title: 'Contact', path: '/contact' },
-    { title: 'Virtual-Wardrobe', path: '/virtual-wardrobe' },
+    { title: 'Vir-Drobe', path: '/virtual-wardrobe' },
    
   ];
 
