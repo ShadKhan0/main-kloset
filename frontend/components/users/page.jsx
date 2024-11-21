@@ -1,8 +1,50 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-const Page = () => {
+
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+const Page = () => { 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [user, setUser ] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+  const fetchUserDetails = async () => {
+      const token = localStorage.getItem('token'); // Get the token from local storage
+      if (token) {
+          try {
+              // Decode the token to get the user ID
+              const decodedToken = jwtDecode(token); // Decode the token
+              const userId = decodedToken.id; // Get the user ID from the decoded token
+
+              // Fetch user details using the user ID
+              const response = await axios.get(`http://localhost:5000/user/getbyid/${userId}`, {
+                  headers: {
+                      'Authorization': `Bearer ${token}` // Include the token in the request header
+                  }
+              });
+              setUser (response.data); // Set the user data
+          } catch (error) {
+              console.error('Error fetching user details:', error);
+          } finally {
+              setLoading(false); // Set loading to false
+          }
+      } else {
+          setLoading(false); // If no token, set loading to false
+      }
+  };
+
+  fetchUserDetails(); // Call the function to fetch user details
+}, []);
+if (loading) {
+  return <div>Loading...</div>;
+}
+
+if (!user) {
+  return <div>No user data available</div>;
+}
+ 
 
   const handleToggle = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -20,7 +62,7 @@ const Page = () => {
           className="w-7 h-7 mr-3 rounded-full shrink-0"
           alt="Profile"
         />
-        Sanjay K
+        {user.name}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-3 fill-gray-400 inline ml-3"

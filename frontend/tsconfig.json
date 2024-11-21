@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "components/countdown.jsx", "app/signup-page/page.jsx"  ],
+, "components/countdown.jsx", "app/signup-page/page.jsx", "app/user-profile/[id]/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

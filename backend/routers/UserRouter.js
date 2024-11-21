@@ -56,5 +56,16 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Get user by ID
+router.get("/getbyid/:id", (req, res) => {
+  Model.findById(req.params.id)
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 module.exports = router;

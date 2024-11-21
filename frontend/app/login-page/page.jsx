@@ -5,6 +5,7 @@ import axios from 'axios';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Please enter email"),
 
@@ -26,11 +27,13 @@ const Page = () => {
         axios.post("http://localhost:5000/user/login", values).then((response) => {
             console.log(response.status);
             if(response.status==200){
+              localStorage.setItem('token', response.data.token);
+
               toast.success("Logged In successfully🎉",{duration:2500}); }
               
             resetForm();
            setTimeout(() => {
-            router.push("/");
+            router.push("/user-profile");
           }, 2000);
         }).catch((err) => {
             console.log(err);
